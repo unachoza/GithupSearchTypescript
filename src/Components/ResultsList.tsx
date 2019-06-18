@@ -1,19 +1,19 @@
 import React from 'react'
-import * as dataArr from './FormContainer'
+// import * as dataArr from './FormContainer'
 
 
-const ResultsList = ({dataArr: []})   => {
+// const ResultsList = ({dataArr: []})   => {
 
-    const repoInfo = dataArr.map((item:any, i:any ):any => {
-        const {name, owner, description, html_url, stargazer_count, license, fork } = item
-    }) 
-    return <div>
-        Results<br/>
-        {repoInfo}
-        </div>
-}
+//     const repoInfo = dataArr.map((item:any, i:any ):any => {
+//         const {name, owner, description, html_url, stargazer_count, license, fork } = item
+//     }) 
+//     return <div>
+//         Results<br/>
+//         {repoInfo}
+//         </div>
+// }
 
-export default ResultsList
+// export default ResultsList
 // interface Results {
 //     results: []
 // }

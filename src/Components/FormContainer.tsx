@@ -1,6 +1,6 @@
 import React, { Component, SyntheticEvent } from "react";
 import Form from "./Form";
-import ResultsList from "./ResultsList";
+// import ResultsList from "./ResultsList";
 import { fetchGithub } from "../API/Github";
 import "../App.css";
 
@@ -90,7 +90,7 @@ class FormContainer extends Component<{}, State> {
           <Form />
           <hr />
           <p className="results-below-text">SEARCH Results</p>
-          <ResultsList dataArr={this.state.data} />
+          {/* <ResultsList dataArr={this.state.data} /> */}
         </div>
       );
     }
