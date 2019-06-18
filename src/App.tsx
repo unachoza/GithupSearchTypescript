@@ -1,12 +1,17 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import Search from "./Components/Search";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import "./App.css";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>Typescript GitHub Repo Search</h1>
+      <Header />
+      <Search />
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
