@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, SyntheticEvent } from "react";
+import Form from "./Form";
+// import Github from '../API/Github'
 import "../App.css";
 
 interface State {
@@ -6,51 +8,86 @@ interface State {
   data: number[];
   forked: boolean;
   error: string;
+  text: string;
+  stars: string;
+  license: string
 }
-
 
 //how to be an argument to handleinput
 interface input {
-  input: React.FormEvent<HTMLInputElement>
-
+  input: React.FormEvent<HTMLInputElement>;
+}
+interface ToggleProps {
+  ClickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 class FormContainer extends Component<{}, State> {
+  constructor(props: {}) {
+    super(props);
+  }
+
   state = {
     isLoaded: false,
     data: [],
     forked: false,
-    error: ""
+    error: "",
+    text: "",
+    stars: "", 
+    license: ""
   };
-  handleSubmit = (e: any): void => {
-    console.log("submit clicked");
+
+  // handleQuery = async ():  => {
+  //   const {text, license, forked, stars } = this.state
+  //   if (text && license && forked) {
+  //     await 
+  //   }
+
+  // }
+  handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    console.log("submit clicked", this.state);
   };
+  /*
   handleTextInput = (e: any): void => {
     console.log("text captured");
-  };
-  handleDropDown = (e: any): void => {
-    console.log("dropped down");
   };
   handleStarsInput = (e: any): void => {
     console.log("stars captured");
   };
-  toggleFork = (e: any): void => {
-    console.log("toggle clicked");
-  };
 
-/*
-handleInput (input: type): void => {
-  console.log(`${input} was input`)
-}
+
+  handleInput = (e: SyntheticEvent) => {
+    console.log("was input");
+  };
 
 
 
 */
 
+handleDropDown = (e: any): void => {
+  console.log("dropped down");
+};
 
+toggleFork = (e: any): void => {
+  console.log("toggle clicked");
+};
 
 
   render() {
+    if (this.state.error) {
+      return (
+        <div className="content">
+          <h1>
+            There was a problem: <br />
+            {this.state.error}
+          </h1>
+        </div>
+      );
+    } else if (this.state.isLoaded && !this.state.data.length) {
+      return <h1 className="content">Your Search returned no results</h1>;
+    } else if (this.state.isLoaded) {
+      return <Form />;
+    }
     return (
       <div className="content">
         <form className="form" onSubmit={e => this.handleSubmit(e)}>
@@ -60,7 +97,7 @@ handleInput (input: type): void => {
             <input
               type="input"
               placeholder="Text"
-              onChange={e => this.handleTextInput(e)}
+              onChange={e => this.setState({ text: e.target.value })}
             />
             <br />
             License
@@ -83,7 +120,7 @@ handleInput (input: type): void => {
             <input
               type="input"
               placeholder="Stars"
-              onChange={e => this.handleStarsInput(e)}
+              onChange={e => this.setState({ stars: e.target.value })}
             />{" "}
             <br />
             <div id="fork">

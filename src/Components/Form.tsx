@@ -1,13 +1,14 @@
+import React from 'react'
 import "../App.css";
 
 interface Props {
   value: any;
 }
 
-const Form = (props: Props): JSX.Element => {
+export const Form = (): JSX.Element => {
   return (
     <div className="content">
-      <form className="form">
+      <form className="form" >
         <div className="column">
           Text
           <br />
@@ -41,3 +42,6 @@ const Form = (props: Props): JSX.Element => {
     </div>
   );
 };
+
+
+export default Form 
