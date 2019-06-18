@@ -8,6 +8,13 @@ interface State {
   error: string;
 }
 
+
+//how to be an argument to handleinput
+interface input {
+  input: React.FormEvent<HTMLInputElement>
+
+}
+
 class FormContainer extends Component<{}, State> {
   state = {
     isLoaded: false,
@@ -30,6 +37,18 @@ class FormContainer extends Component<{}, State> {
   toggleFork = (e: any): void => {
     console.log("toggle clicked");
   };
+
+/*
+handleInput (input: type): void => {
+  console.log(`${input} was input`)
+}
+
+
+
+*/
+
+
+
 
   render() {
     return (
