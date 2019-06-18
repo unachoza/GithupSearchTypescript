@@ -1,6 +1,7 @@
 import React, { Component, SyntheticEvent } from "react";
 import Form from "./Form";
-// import Github from '../API/Github'
+import ResultsList from "./ResultsList";
+import { fetchGithub } from "../API/Github";
 import "../App.css";
 
 interface State {
@@ -10,7 +11,7 @@ interface State {
   error: string;
   text: string;
   stars: string;
-  license: string
+  license: string;
 }
 
 //how to be an argument to handleinput
@@ -32,17 +33,16 @@ class FormContainer extends Component<{}, State> {
     forked: false,
     error: "",
     text: "",
-    stars: "", 
+    stars: "",
     license: ""
   };
 
-  // handleQuery = async ():  => {
-  //   const {text, license, forked, stars } = this.state
-  //   if (text && license && forked) {
-  //     await 
-  //   }
-
-  // }
+  handleQuery = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    const { text, license, forked, stars } = this.state;
+    if (text && license && forked && stars) {
+      await fetchGithub(this.state);
+    }
+  };
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     console.log("submit clicked", this.state);
@@ -64,14 +64,13 @@ class FormContainer extends Component<{}, State> {
 
 */
 
-handleDropDown = (e: any): void => {
-  console.log("dropped down");
-};
+  handleDropDown = (e: any): void => {
+    console.log("dropped down");
+  };
 
-toggleFork = (e: any): void => {
-  console.log("toggle clicked");
-};
-
+  toggleFork = (e: any): void => {
+    console.log("toggle clicked");
+  };
 
   render() {
     if (this.state.error) {
@@ -86,11 +85,19 @@ toggleFork = (e: any): void => {
     } else if (this.state.isLoaded && !this.state.data.length) {
       return <h1 className="content">Your Search returned no results</h1>;
     } else if (this.state.isLoaded) {
-      return <Form />;
+      return (
+        <div>
+          <Form />
+          <hr />
+          <p className="results-below-text">SEARCH Results</p>
+          <ResultsList dataArr={this.state.data} />
+        </div>
+      );
     }
     return (
       <div className="content">
-        <form className="form" onSubmit={e => this.handleSubmit(e)}>
+        <Form />
+        {/* <form className="form" onSubmit={e => this.handleSubmit(e)}>
           <div className="column">
             Text
             <br />
@@ -133,7 +140,7 @@ toggleFork = (e: any): void => {
             </div>
           </div>
           <input id="submit" type="submit" value="Search" />
-        </form>
+        </form> */}
         <hr />
         <p className="results-below-text">
           Please enter query and click SEARCH button above, results appear here

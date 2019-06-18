@@ -35,10 +35,6 @@ export const Form = (): JSX.Element => {
         </div>
         <input id="submit" type="submit" value="Search" />
       </form>
-      <hr />
-      <p className="results-below-text">
-        Please enter query and click SEARCH button above, results appear here
-      </p>
     </div>
   );
 };
