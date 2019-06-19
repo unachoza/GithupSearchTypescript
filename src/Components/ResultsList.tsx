@@ -14,7 +14,10 @@ class ResultsList extends Component<ResultsProps> {
       const mapping = this.props.data.map((item:any) => {
           console.log(item.id)
           return (
-              <h1>{item.id}</h1>
+              <div>
+              <h1 key={item.id}>{item.id} {item.name} {item.owner.login} {item.description} </h1>
+
+              </div>
           )})
       
   console.log(this.props.data)
