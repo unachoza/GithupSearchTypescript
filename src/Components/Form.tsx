@@ -6,13 +6,14 @@ interface FormProps extends React.Props<any> {
   stars: (e: any) => void;
   dropDown: (e: any) => void;
   toggleFork: (e: any) => void;
+  submit: (e: any) => void;
 }
 
 class Form extends Component<FormProps> {
   render() {
     return (
       <div className="content">
-        <form className="form">
+        <form className="form" onSubmit={e => this.props.submit(e)}>
           <div className="column">
             Text
             <br />

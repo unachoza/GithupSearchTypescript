@@ -102,6 +102,7 @@ class FormContainer extends Component<{}, State> {
             stars={(e: any) => this.handleStarsInput(e)}
             dropDown={(e: any) => this.handleDropDown(e)}
             toggleFork={(e: any) => this.handleDropDown(e)}
+            submit={(e: any) => this.handleSubmit(e)}
           />
           <hr />
           <p className="results-below-text">SEARCH Results</p>
@@ -111,51 +112,14 @@ class FormContainer extends Component<{}, State> {
     }
     return (
       <div className="content">
-        {/* <Form /> */}
-        <form className="form" onSubmit={e => this.handleSubmit(e)}>
-          <div className="column">
-            Text
-            <br />
-            <input
-              type="input"
-              placeholder="Text"
-              onChange={e => this.setState({ text: e.target.value })}
-            />
-            <br />
-            License
-            <br />
-            <select
-              className="dropdown"
-              name="license"
-              onChange={e => this.handleDropDown(e)}
-            >
-              <option value="null" />
-              <option value="MIT">MIT</option>
-              <option value="ISC">ISC</option>
-              <option value="apache-2.0">apache-2.0</option>
-              <option value="gpl">gpl</option>
-            </select>
-          </div>
-          <div className="column">
-            Stars
-            <br />
-            <input
-              type="input"
-              placeholder="Stars"
-              onChange={e => this.setState({ stars: e.target.value })}
-            />{" "}
-            <br />
-            <div id="fork">
-              <input
-                id="box"
-                type="checkbox"
-                onClick={e => this.toggleFork(e)}
-              />
-              <p id="checkbox-title">Include Forked</p>
-            </div>
-          </div>
-          <input id="submit" type="submit" value="Search" />
-        </form>
+        <Form
+          text={(e: any) => this.handleTextInput(e)}
+          stars={(e: any) => this.handleStarsInput(e)}
+          dropDown={(e: any) => this.handleDropDown(e)}
+          toggleFork={(e: any) => this.handleDropDown(e)}
+          submit={(e: any) => this.handleSubmit(e)}
+        />
+
         <hr />
         <p className="results-below-text">
           Please enter query and click SEARCH button above, results appear here
