@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { State } from "./FormContainer";
+import ResultSingle from './ResultSingle'
 
 interface ResultsProps {
   text: string;
-  data: any
+  data: any;
 }
 
 class ResultsList extends Component<ResultsProps> {
@@ -11,25 +12,24 @@ class ResultsList extends Component<ResultsProps> {
     super(props);
   }
   render() {
-      const mapping = this.props.data.map((item:any) => {
-          console.log(item.id)
-          return (
-              <div>
-              <h1 key={item.id}>{item.id} {item.name} {item.owner.login} {item.description} </h1>
+    const mapping = this.props.data.map((item: any) => {
+      console.log(item.id);
+      return <ResultSingle name={item.name}/> 
+    });
 
-              </div>
-          )})
-      
-  console.log(this.props.data)
+    console.log(this.props.data);
 
     // console.log(this.state);
     // if (this.state.data.length){
     //     console.log('something')
     // }
 
-    return <div>She did this <br/>
-    {mapping}
-    </div>;
+    return (
+      <div>
+        She did this <br />
+        {mapping}
+      </div>
+    );
   }
 }
 
