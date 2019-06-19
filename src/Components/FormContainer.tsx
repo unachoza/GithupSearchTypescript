@@ -1,10 +1,11 @@
 import React, { Component, SyntheticEvent } from "react";
 import Form from "./Form";
-// import ResultsList from "./ResultsList";
+import ResultsList from "./ResultsList";
 // import { fetchGithub } from "../API/Github";
 import "../App.css";
+import { AnyNaptrRecord } from "dns";
 
-interface State {
+export interface State {
   isLoaded: boolean;
   data: number[];
   forked: boolean;
@@ -40,22 +41,23 @@ class FormContainer extends Component<{}, State> {
   handleQuery = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     const { text, license, forked, stars } = this.state;
     // if (text && license && forked && stars) {
-      if (text) {
+    if (text) {
       await fetch(
-          `https://api.github.com/search/repositories?q=${
-            this.state.text
-          }+license:mit+stars:>10+fork:true&sort=stars&order=desc`
-        )
+        `https://api.github.com/search/repositories?q=${
+          this.state.text
+        }+license:mit+stars:>10+fork:true&sort=stars&order=desc`
+      )
         .then(res => res.json())
-        .then( data => {
-          this.setState({ isLoaded: true, data: data.items })
-        })
-    console.log("hit", this.state)
-  }};
+        .then(data => {
+          this.setState({ isLoaded: true, data: data.items });
+        });
+      console.log("hit", this.state);
+    }
+  };
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     console.log("submit clicked", this.state);
-    this.handleQuery(e)
+    this.handleQuery(e);
   };
   /*
   handleTextInput = (e: any): void => {
@@ -100,7 +102,7 @@ class FormContainer extends Component<{}, State> {
           <Form />
           <hr />
           <p className="results-below-text">SEARCH Results</p>
-          {/* <ResultsList dataArr={this.state.data} /> */}
+          <ResultsList {...this.state} /> {/*dataArr={this.state.data} */}
         </div>
       );
     }

@@ -1,12 +1,38 @@
-import React from 'react'
-// import * as dataArr from './FormContainer'
+import React, { Component } from "react";
+import { State } from "./FormContainer";
 
+interface ResultsProps {
+  text: string;
+  data: any
+}
 
-// const ResultsList = ({dataArr: []})   => {
+class ResultsList extends Component<ResultsProps> {
+  constructor(props: ResultsProps) {
+    super(props);
+  }
+  render() {
+      const mapping = this.props.data.map((item:any) => {
+          console.log(item.id)
+          return (
+              <h1>{item.id}</h1>
+          )})
+      
+  console.log(this.props.data)
+
+    // console.log(this.state);
+    // if (this.state.data.length){
+    //     console.log('something')
+    // }
+
+    return <div>She did this <br/>
+    {mapping}
+    </div>;
+  }
+}
 
 //     const repoInfo = dataArr.map((item:any, i:any ):any => {
 //         const {name, owner, description, html_url, stargazer_count, license, fork } = item
-//     }) 
+//     })
 //     return <div>
 //         Results<br/>
 //         {repoInfo}
@@ -33,10 +59,7 @@ import React from 'react'
 //         })
 //     }
 //     render() {
-//         return (
-//             <div>She did this {this.renderList()}</div>
-//         )
-//     }
+
 // }
 
-// export default ResultsList
+export default ResultsList;
