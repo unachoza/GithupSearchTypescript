@@ -1,6 +1,6 @@
 import React from "react";
 
-const ResultSingle = ({ name }: {name:any}) => {
+const ResultSingle = ({ name }: {name:string}) => {
   
   return (
     <div>

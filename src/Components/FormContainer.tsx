@@ -54,34 +54,32 @@ class FormContainer extends Component<{}, State> {
       console.log("hit", this.state);
     }
   };
+
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     console.log("submit clicked", this.state);
     this.handleQuery(e);
   };
-  /*
+
   handleTextInput = (e: any): void => {
-    console.log("text captured");
+    this.setState({ text: e.target.value });
   };
   handleStarsInput = (e: any): void => {
-    console.log("stars captured");
+    this.setState({ stars: e.target.value });
   };
 
-
-  handleInput = (e: SyntheticEvent) => {
-    console.log("was input");
-  };
-
-
-
-*/
+  // handleInput = (e: SyntheticEvent) => {
+  //   console.log("was input");
+  // };
 
   handleDropDown = (e: any): void => {
-    console.log("dropped down");
+    this.setState({ license: e.target.value });
   };
 
   toggleFork = (e: any): void => {
-    console.log("toggle clicked");
+    this.state.forked
+      ? this.setState({ forked: false })
+      : this.setState({ forked: true });
   };
 
   render() {
@@ -99,7 +97,12 @@ class FormContainer extends Component<{}, State> {
     } else if (this.state.isLoaded) {
       return (
         <div>
-          <Form />
+          <Form
+            text={(e: any) => this.handleTextInput(e)}
+            stars={(e: any) => this.handleStarsInput(e)}
+            dropDown={(e: any) => this.handleDropDown(e)}
+            toggleFork={(e: any) => this.handleDropDown(e)}
+          />
           <hr />
           <p className="results-below-text">SEARCH Results</p>
           <ResultsList {...this.state} /> {/*dataArr={this.state.data} */}
