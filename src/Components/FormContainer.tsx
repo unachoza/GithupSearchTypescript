@@ -1,7 +1,7 @@
 import React, { Component, SyntheticEvent } from "react";
 import Form from "./Form";
 // import ResultsList from "./ResultsList";
-import { fetchGithub } from "../API/Github";
+// import { fetchGithub } from "../API/Github";
 import "../App.css";
 
 interface State {
@@ -39,13 +39,23 @@ class FormContainer extends Component<{}, State> {
 
   handleQuery = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     const { text, license, forked, stars } = this.state;
-    if (text && license && forked && stars) {
-      await fetchGithub(this.state);
-    }
-  };
+    // if (text && license && forked && stars) {
+      if (text) {
+      await fetch(
+          `https://api.github.com/search/repositories?q=${
+            this.state.text
+          }+license:mit+stars:>10+fork:true&sort=stars&order=desc`
+        )
+        .then(res => res.json())
+        .then( data => {
+          this.setState({ isLoaded: true, data: data.items })
+        })
+    console.log("hit", this.state)
+  }};
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     console.log("submit clicked", this.state);
+    this.handleQuery(e)
   };
   /*
   handleTextInput = (e: any): void => {
@@ -96,8 +106,8 @@ class FormContainer extends Component<{}, State> {
     }
     return (
       <div className="content">
-        <Form />
-        {/* <form className="form" onSubmit={e => this.handleSubmit(e)}>
+        {/* <Form /> */}
+        <form className="form" onSubmit={e => this.handleSubmit(e)}>
           <div className="column">
             Text
             <br />
@@ -140,7 +150,7 @@ class FormContainer extends Component<{}, State> {
             </div>
           </div>
           <input id="submit" type="submit" value="Search" />
-        </form> */}
+        </form>
         <hr />
         <p className="results-below-text">
           Please enter query and click SEARCH button above, results appear here
