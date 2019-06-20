@@ -4,6 +4,7 @@ import ResultsList from "./ResultsList";
 // import { fetchGithub } from "../API/Github";
 import "../App.css";
 import { AnyNaptrRecord } from "dns";
+import { string } from "prop-types";
 
 export interface State {
   isLoaded: boolean;
@@ -13,6 +14,11 @@ export interface State {
   text: string;
   stars: string;
   license: string;
+  name: string;
+  owner: string;
+  url: string;
+  description: string;
+  
 }
 
 //how to be an argument to handleinput
@@ -35,7 +41,11 @@ class FormContainer extends Component<{}, State> {
     error: "",
     text: "",
     stars: "",
-    license: ""
+    license: "",
+    name: "",
+    owner: "",
+    url: "",
+    description: "",
   };
 
   handleQuery = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
