@@ -12,7 +12,7 @@ const ResultSingle = ({ everything }: { everything: any }) => {
     license
   } = everything;
   return (
-    <div className="results-container">
+    <div className="result-container">
       <div className="results-sub-container" id="text">
         <h2 className="repo-text">
           {" "}
@@ -20,7 +20,7 @@ const ResultSingle = ({ everything }: { everything: any }) => {
         </h2>
         <p className="repo-description">{description}</p>
         <a href={html_url}>See on Github</a>
-        <div id="fork">forked</div>
+        <div id="fork-button">forked</div>
       </div>
       <div className="results-sub-container" id="star">
         <h6 className="text-title">Stars:</h6>

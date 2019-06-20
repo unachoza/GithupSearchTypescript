@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { State } from "./FormContainer";
 import ResultSingle from "./ResultSingle";
-import "./Results.css"
-import "../App.css"
+import "./Results.css";
+import "../App.css";
 
 export interface ResultsProps {
   text: any;
@@ -22,12 +22,7 @@ class ResultsList extends Component<ResultsProps> {
   render(): JSX.Element {
     const mapping = this.props.data.map((item: any) => {
       console.log(item.id);
-      return (
-          <div className="content">
-      <ResultSingle everything={item} />
-
-          </div>
-      )
+      return <ResultSingle everything={item} />;
     });
 
     console.log(this.props.data);
