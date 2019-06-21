@@ -1,10 +1,8 @@
-import React, { Component, SyntheticEvent } from "react";
+import React, { Component, MouseEvent } from "react";
 import Form from "./Form";
 import ResultsList from "./ResultsList";
-// import { fetchGithub } from "../API/Github";
 import "../App.css";
-import { AnyNaptrRecord } from "dns";
-import { string } from "prop-types";
+
 
 export interface State {
   isLoaded: boolean;
@@ -21,9 +19,6 @@ export interface State {
 }
 
 class FormContainer extends Component<{}, State> {
-  constructor(props: {}) {
-    super(props);
-  }
 
   state = {
     isLoaded: false,
@@ -47,11 +42,14 @@ class FormContainer extends Component<{}, State> {
       )
         .then(res => res.json())
         .then(data => {
-          this.setState({ isLoaded: true, data: data.items });
+          this.setState({
+            isLoaded: true,
+            data: data.items,
+            error: data.error
+          });
         })
-
-        .catch((error: string) => {
-          this.setState({ error });
+        .catch((errors: any) => {
+          this.setState({ error: errors.message });
           console.log(this.state.error);
         });
       console.log(this.state);
@@ -74,6 +72,7 @@ class FormContainer extends Component<{}, State> {
   handleStarsInput = (e: any): void => {
     this.setState({ stars: e.target.value });
   };
+  validateStars = () => {};
 
   //should I be able to use this function twice for license and text?
   // handleInput = (e: SyntheticEvent) => {
@@ -84,8 +83,7 @@ class FormContainer extends Component<{}, State> {
     this.setState({ license: e.target.value });
   };
 
-  toggleFork = (e: any): void => {
-    
+  toggleFork = (e: MouseEvent): void => {
     this.state.forked
       ? this.setState({ forked: false })
       : this.setState({ forked: true });

@@ -1,6 +1,4 @@
-import axios from "axios";
-import { async } from "q";
-
+import React from 'react'
 // export const fetchGithub = async (props: any): Promise<any> => {
 //   await axios
 //     .get(

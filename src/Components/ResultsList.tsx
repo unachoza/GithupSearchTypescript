@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { State } from "./FormContainer";
 import ResultSingle from "./ResultSingle";
 import "./Results.css";
 import "../App.css";
@@ -16,9 +15,6 @@ export interface ResultsProps {
 }
 
 class ResultsList extends Component<ResultsProps> {
-  constructor(props: ResultsProps) {
-    super(props);
-  }
   render(): JSX.Element {
     const mapping = this.props.data.map((item: any) => {
       return <ResultSingle everything={item} />;

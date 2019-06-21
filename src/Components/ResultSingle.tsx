@@ -1,5 +1,4 @@
 import React from "react";
-import { ResultsProps } from "./ResultsList";
 import "./Results.css";
 
 interface EverythingReturn {
