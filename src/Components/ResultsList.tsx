@@ -6,18 +6,21 @@ import "../App.css";
 export interface ResultsProps {
   text: string;
   data?: any;
-  name: string;
-  owner: string;
-  url: string;
-  description: string;
-  stars: string;
-  license: string;
 }
+export interface RepoItems {
+  name: string;
+  owner: {login: string};
+  html_url: string;
+  description: string;
+  stargazers_count: number;
+  license: {name: string};
+}
+
 
 const ResultsList = (props: ResultsProps) => {
   return (
     <div>
-      {props.data.map((item: any) => (
+      {props.data.map((item: RepoItems) => (
         <ResultSingle everything={item} />
       ))}
     </div>

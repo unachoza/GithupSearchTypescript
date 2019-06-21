@@ -10,11 +10,11 @@ export interface State {
   forked: boolean;
   error: string;
   text: string;
-  stars: string;
+  stargazers_count: string;
   license: string;
   name: string;
   owner: string;
-  url: string;
+  html_url: string;
   description: string;
 }
 
@@ -26,19 +26,19 @@ class FormContainer extends Component<{}, State> {
     forked: false,
     error: "",
     text: "",
-    stars: "",
+    stargazers_count: "",
     license: "",
     name: "",
     owner: "",
-    url: "",
+    html_url: "",
     description: ""
   };
 
   handleQuery = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    const { text, license, forked, stars } = this.state;
-    if (text && license && stars) {
+    const { text, license, forked, stargazers_count } = this.state;
+    if (text && license && stargazers_count) {
       await fetch(
-        `https://api.github.com/search/repositories?q=${text}+license:${license}+stars:${stars}+fork:${forked}&sort=stars&order=desc`
+        `https://api.github.com/search/repositories?q=${text}+license:${license}+stars:${stargazers_count}+fork:${forked}&sort=stars&order=desc`
       )
         .then(res => res.json())
         .then(data => {
@@ -70,7 +70,7 @@ class FormContainer extends Component<{}, State> {
     this.setState({ text: e.target.value });
   };
   handleStarsInput = (e: any): void => {
-    this.setState({ stars: e.target.value });
+    this.setState({ stargazers_count: e.target.value });
   };
   validateStars = () => {};
 

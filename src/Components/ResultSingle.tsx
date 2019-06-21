@@ -1,18 +1,8 @@
 import React from "react";
 import "./Results.css";
+import { RepoItems } from "./ResultsList";
 
-interface EverythingReturn {
-    name: string,
-    owner: string,
-    html_url: string,
-    description: string,
-    stargazers_count: number,
-    license: string
-}
-// string | number
-
-
-const ResultSingle = ({ everything }: { everything: any }) => {
+const ResultSingle = ({ everything }: { everything: RepoItems }) => {
   const {
     name,
     owner,
@@ -25,7 +15,6 @@ const ResultSingle = ({ everything }: { everything: any }) => {
     <div className="result-container">
       <div className="results-sub-container" id="text">
         <h2 className="repo-text">
-          {" "}
           {name} Author: {owner.login}
         </h2>
         <p className="repo-description">{description}</p>
