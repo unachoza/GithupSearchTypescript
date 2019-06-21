@@ -30,7 +30,7 @@ class ResultsList extends Component<ResultsProps> {
     return (
       <div>
         {mapping}
-        She did this <br />
+        <br />
       </div>
     );
   }

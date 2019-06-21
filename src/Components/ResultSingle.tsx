@@ -2,6 +2,17 @@ import React from "react";
 import { ResultsProps } from "./ResultsList";
 import "./Results.css";
 
+interface EverythingReturn {
+    name: string,
+    owner: string,
+    html_url: string,
+    description: string,
+    stargazers_count: number,
+    license: string
+}
+// string | number
+
+
 const ResultSingle = ({ everything }: { everything: any }) => {
   const {
     name,

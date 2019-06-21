@@ -13,3 +13,17 @@ import { async } from "q";
 //       console.log(error);
 //     });
 // };
+
+// export const handleQuery = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+//     const { text, license, forked, stars } = this.state;
+//     // if (text && license && forked && stars) {
+//     if (text) {
+
+
+// export const github =  fetch(
+//         `https://api.github.com/search/repositories?q=${
+//           this.state.text
+//         }+license:mit+stars:>10+fork:true&sort=stars&order=desc`
+//       )
+        
+ 
