@@ -59,6 +59,7 @@ class FormContainer extends Component<{}, State> {
       console.log("no");
       alert("please fill all inputs");
     }
+    this.showResults();
   };
 
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -74,6 +75,7 @@ class FormContainer extends Component<{}, State> {
     this.setState({ stars: e.target.value });
   };
 
+  //should I be able to use this function twice for license and text?
   // handleInput = (e: SyntheticEvent) => {
   //   console.log("was input");
   // };
@@ -92,7 +94,6 @@ class FormContainer extends Component<{}, State> {
   private showError = (): JSX.Element => {
     return (
       <div>
-        {" "}
         There was a problem: <br />
         {this.state.error}
       </div>
@@ -100,11 +101,11 @@ class FormContainer extends Component<{}, State> {
   };
 
   showResults = (): JSX.Element => {
-    console.log("here");
     return this.state.isLoaded && !this.state.data.length ? (
       <h1 className="content">Your Search returned no results</h1>
     ) : (
       <div>
+        <hr />
         <p className="results-below-text">SEARCH Results</p>
         <ResultsList {...this.state} />
       </div>
@@ -113,8 +114,9 @@ class FormContainer extends Component<{}, State> {
 
   render() {
     //oneliner functino that looks clean
-    this.state.error ? this.showError() : this.showResults();
-    return (
+    return this.state.error ? (
+      this.showError()
+    ) : (
       <div className="content">
         <Form
           text={(e: any) => this.handleTextInput(e)}
@@ -123,10 +125,17 @@ class FormContainer extends Component<{}, State> {
           toggleFork={(e: any) => this.handleDropDown(e)}
           submit={(e: any) => this.handleSubmit(e)}
         />
-        <hr />
-        <p className="results-below-text">
-          Please enter query and click SEARCH button above, results appear here
-        </p>
+        {this.state.isLoaded ? (
+          this.showResults()
+        ) : (
+          <div>
+            <hr />
+            <p className="results-below-text">
+              Please enter query and click SEARCH button above, results appear
+              here
+            </p>
+          </div>
+        )}
       </div>
     );
   }
