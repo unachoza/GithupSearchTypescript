@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import ResultSingle from "./ResultSingle";
 import "./Results.css";
 import "../App.css";
 
 export interface ResultsProps {
-  text: any;
-  data: any;
+  text: string;
+  data?: any;
   name: string;
   owner: string;
   url: string;
@@ -14,19 +14,14 @@ export interface ResultsProps {
   license: string;
 }
 
-class ResultsList extends Component<ResultsProps> {
-  render(): JSX.Element {
-    const mapping = this.props.data.map((item: any) => {
-      return <ResultSingle everything={item} />;
-    });
-    console.log(this.props.data);
-
-    return (
-      <div>
-        {mapping}
-      </div>
-    );
-  }
-}
+const ResultsList = (props: ResultsProps) => {
+  return (
+    <div>
+      {props.data.map((item: any) => (
+        <ResultSingle everything={item} />
+      ))}
+    </div>
+  );
+};
 
 export default ResultsList;

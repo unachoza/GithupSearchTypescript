@@ -6,7 +6,7 @@ import "../App.css";
 
 export interface State {
   isLoaded: boolean;
-  data: number[];
+  data?: number[];
   forked: boolean;
   error: string;
   text: string;
