@@ -9,11 +9,10 @@ interface FormProps extends React.Props<any> {
   submit: (e: any) => void;
 }
 
-class Form extends Component<FormProps> {
-  render() {
+const Form = (props: FormProps) => {
     return (
       <div className="content">
-        <form className="form" onSubmit={e => this.props.submit(e)}>
+        <form className="form" onSubmit={e => props.submit(e)}>
           <div className="column">
             Text
             <br />
@@ -21,7 +20,7 @@ class Form extends Component<FormProps> {
               type="input"
               placeholder="Text"
               required
-              onChange={e => this.props.text(e)}
+              onChange={e => props.text(e)}
             />
             <br />
             License
@@ -29,7 +28,7 @@ class Form extends Component<FormProps> {
             <select
               className="dropdown"
               name="license"
-              onChange={e => this.props.dropDown(e)}
+              onChange={e => props.dropDown(e)}
             >
               <option value="null" />
               <option value="MIT">MIT</option>
@@ -44,14 +43,14 @@ class Form extends Component<FormProps> {
             <input
               type="input"
               placeholder="Stars"
-              onChange={e => this.props.stars(e)}
+              onChange={e => props.stars(e)}
             />{" "}
             <br />
             <div id="fork">
               <input
                 id="box"
                 type="checkbox"
-                onClick={e => this.props.toggleFork(e)}
+                onClick={e => props.toggleFork(e)}
               />
               <p id="checkbox-title">Include Forked</p>
             </div>
@@ -61,6 +60,6 @@ class Form extends Component<FormProps> {
       </div>
     );
   }
-}
+
 
 export default Form;

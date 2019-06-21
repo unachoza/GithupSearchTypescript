@@ -85,6 +85,7 @@ class FormContainer extends Component<{}, State> {
   };
 
   toggleFork = (e: any): void => {
+    
     this.state.forked
       ? this.setState({ forked: false })
       : this.setState({ forked: true });

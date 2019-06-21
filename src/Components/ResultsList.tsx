@@ -21,16 +21,13 @@ class ResultsList extends Component<ResultsProps> {
   }
   render(): JSX.Element {
     const mapping = this.props.data.map((item: any) => {
-      console.log(item.id);
       return <ResultSingle everything={item} />;
     });
-
     console.log(this.props.data);
 
     return (
       <div>
         {mapping}
-        <br />
       </div>
     );
   }
