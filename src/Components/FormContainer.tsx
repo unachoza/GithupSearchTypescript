@@ -3,7 +3,6 @@ import Form from "./Form";
 import ResultsList from "./ResultsList";
 import "../App.css";
 
-
 export interface State {
   isLoaded: boolean;
   data?: number[];
@@ -19,7 +18,6 @@ export interface State {
 }
 
 class FormContainer extends Component<{}, State> {
-
   state = {
     isLoaded: false,
     data: [],
@@ -73,12 +71,6 @@ class FormContainer extends Component<{}, State> {
     this.setState({ stargazers_count: e.target.value });
   };
   validateStars = () => {};
-
-  //should I be able to use this function twice for license and text?
-  // handleInput = (e: SyntheticEvent) => {
-  //   console.log("was input");
-  // };
-
   handleDropDown = (e: any): void => {
     this.setState({ license: e.target.value });
   };
@@ -101,7 +93,11 @@ class FormContainer extends Component<{}, State> {
 
   showResults = (): JSX.Element => {
     return this.state.isLoaded && !this.state.data.length ? (
-      <h1 className="content">Your Search returned no results</h1>
+      <div>
+        <hr />
+        <p className="results-below-text">SEARCH Results</p>
+        <h1 className="content">Your Search returned no results</h1>
+      </div>
     ) : (
       <div>
         <hr />
@@ -118,11 +114,11 @@ class FormContainer extends Component<{}, State> {
     ) : (
       <div className="content">
         <Form
-          text={(e: any) => this.handleTextInput(e)}
-          stars={(e: any) => this.handleStarsInput(e)}
-          dropDown={(e: any) => this.handleDropDown(e)}
-          toggleFork={(e: any) => this.handleDropDown(e)}
-          submit={(e: any) => this.handleSubmit(e)}
+          text={(e) => this.handleTextInput(e)}
+          stars={(e) => this.handleStarsInput(e)}
+          dropDown={(e) => this.handleDropDown(e)}
+          toggleFork={(e) => this.handleDropDown(e)}
+          submit={(e) => this.handleSubmit(e)}
         />
         {this.state.isLoaded ? (
           this.showResults()

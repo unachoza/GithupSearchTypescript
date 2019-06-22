@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 
-const Header = () => (
+const Header = (): JSX.Element => (
   <div className="header">
     <img
       className="logo"

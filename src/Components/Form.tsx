@@ -14,17 +14,14 @@ const Form = (props: FormProps) => {
     <div className="content">
       <form className="form" onSubmit={e => props.submit(e)}>
         <div className="column">
-          Text
-          <br />
+          <div>Text</div>
           <input
             type="input"
             placeholder="Text"
             required
             onChange={e => props.text(e)}
           />
-          <br />
-          License
-          <br />
+          <div>License</div>
           <select
             className="dropdown"
             name="license"
@@ -36,14 +33,12 @@ const Form = (props: FormProps) => {
           </select>
         </div>
         <div className="column">
-          Stars
-          <br />
+          <div>Stars</div>
           <input
             type="input"
             placeholder="Stars"
             onChange={e => props.stars(e)}
           />{" "}
-          <br />
           <div id="fork">
             <input
               id="box"

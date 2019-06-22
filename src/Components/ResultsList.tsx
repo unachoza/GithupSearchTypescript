@@ -9,22 +9,19 @@ export interface ResultsProps {
 }
 export interface RepoItems {
   name: string;
-  owner: {login: string};
+  owner: { login: string };
   html_url: string;
   description: string;
   stargazers_count: number;
-  license: {name: string};
+  license: { name: string };
 }
 
-
-const ResultsList = (props: ResultsProps) => {
-  return (
-    <div>
-      {props.data.map((item: RepoItems) => (
-        <ResultSingle everything={item} />
-      ))}
-    </div>
-  );
-};
+const ResultsList = (props: ResultsProps): JSX.Element => (
+  <div>
+    {props.data.map((item: RepoItems) => (
+      <ResultSingle everything={item} />
+    ))}
+  </div>
+);
 
 export default ResultsList;

@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import FormContainer from "./FormContainer";
 
-const Search = () => (
+const Search = (): JSX.Element => (
   <div className="search-container">
     <h1 className="title">EVEN FINANCIAL GitHub Repo Search</h1>
     <FormContainer />

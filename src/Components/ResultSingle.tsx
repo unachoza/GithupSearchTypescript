@@ -2,7 +2,7 @@ import React from "react";
 import "./Results.css";
 import { RepoItems } from "./ResultsList";
 
-const ResultSingle = ({ everything }: { everything: RepoItems }) => {
+const ResultSingle = ({ everything }: { everything: RepoItems }): JSX.Element => {
   const {
     name,
     owner,
