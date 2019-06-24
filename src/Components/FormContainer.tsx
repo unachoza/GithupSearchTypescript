@@ -43,15 +43,18 @@ class FormContainer extends Component<{}, State> {
           this.setState({
             isLoaded: true,
             data: data.items,
-            error: data.error
+            error: data.error.message
           });
         })
-        .catch((errors: any) => {
+       
+        .catch((errors: any) => { console.log(errors)
           this.setState({ error: errors.message });
           console.log(this.state.error);
         });
       console.log(this.state);
-    } else {
+    
+      }
+    else {
       console.log("no");
       alert("please fill all inputs");
     }
@@ -114,11 +117,11 @@ class FormContainer extends Component<{}, State> {
     ) : (
       <div className="content">
         <Form
-          text={(e) => this.handleTextInput(e)}
-          stars={(e) => this.handleStarsInput(e)}
-          dropDown={(e) => this.handleDropDown(e)}
-          toggleFork={(e) => this.handleDropDown(e)}
-          submit={(e) => this.handleSubmit(e)}
+          text={e => this.handleTextInput(e)}
+          stars={e => this.handleStarsInput(e)}
+          dropDown={e => this.handleDropDown(e)}
+          toggleFork={e => this.handleDropDown(e)}
+          submit={e => this.handleSubmit(e)}
         />
         {this.state.isLoaded ? (
           this.showResults()
