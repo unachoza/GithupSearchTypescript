@@ -19,13 +19,13 @@ const Form = (props: FormProps) => {
             type="input"
             placeholder="Text"
             required
-            onChange={e => props.text(e)}
+            onBlur={e => props.text(e)}
           />
           <div>License</div>
           <select
             className="dropdown"
             name="license"
-            onChange={e => props.dropDown(e)}
+            onBlur={e => props.dropDown(e)}
           >
             {["", "MIT", "ISC", "apache-2.0", "gpl"].map(choice => (
               <option value={choice}>{choice}</option>
@@ -37,7 +37,7 @@ const Form = (props: FormProps) => {
           <input
             type="input"
             placeholder="Stars"
-            onChange={e => props.stars(e)}
+            onBlur={e => props.stars(e)}
           />{" "}
           <div id="fork">
             <input

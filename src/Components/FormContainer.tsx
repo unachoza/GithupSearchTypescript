@@ -4,7 +4,7 @@ import ResultsList from "./ResultsList";
 import { fetchGithub } from "../API/Github";
 import "../App.css";
 
-export interface State {
+export interface FormState {
   isLoaded: boolean;
   data?: number[];
   forked: boolean;
@@ -18,7 +18,7 @@ export interface State {
   description: string;
 }
 
-class FormContainer extends Component<{}, State> {
+class FormContainer extends Component<{}, FormState> {
   state = {
     isLoaded: false,
     data: [],
@@ -58,6 +58,7 @@ class FormContainer extends Component<{}, State> {
       alert("please fill all query inputs");
     }
     this.showResults();
+    
   };
 
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -93,21 +94,7 @@ class FormContainer extends Component<{}, State> {
     );
   };
 
-  showResults = (): JSX.Element => {
-    return this.state.isLoaded && !this.state.data.length ? (
-      <div>
-        <hr />
-        <p className="results-below-text">SEARCH Results</p>
-        <h1 className="content">Your Search returned no results</h1>
-      </div>
-    ) : (
-      <div>
-        <hr />
-        <p className="results-below-text">SEARCH Results</p>
-        <ResultsList {...this.state} />
-      </div>
-    );
-  };
+  
 
   render() {
     return this.state.error ? (
