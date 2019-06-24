@@ -32,6 +32,14 @@ class FormContainer extends Component<{}, State> {
     description: ""
   };
 
+  validateStarsInput = (inputtxt:string): void =>  {
+    var letters = /^[A-Za-z]+$/;
+   if(inputtxt.match(letters)) {
+     alert('The stars input is asking for a query such as greater than, less than, exactly a value or a range of values')
+     window.location.reload()
+   } 
+  }
+
   handleQuery = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     const { text, license, forked, stargazers_count } = this.state;
     if (text && license && stargazers_count) {
@@ -43,26 +51,19 @@ class FormContainer extends Component<{}, State> {
           this.setState({
             isLoaded: true,
             data: data.items,
-            error: data.error.message
           });
         })
-       
-        .catch((errors: any) => { console.log(errors)
-          this.setState({ error: errors.message });
-          console.log(this.state.error);
-        });
-      console.log(this.state);
-    
       }
     else {
       console.log("no");
-      alert("please fill all inputs");
+      alert("please fill all query inputs");
     }
     this.showResults();
   };
 
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+    this.validateStarsInput(this.state.stargazers_count)
     console.log("submit clicked", this.state);
     this.handleQuery(e);
   };
