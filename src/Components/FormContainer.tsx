@@ -55,7 +55,6 @@ class FormContainer extends Component<{}, State> {
           });
         });
     } else {
-      console.log("no");
       alert("please fill all query inputs");
     }
     this.showResults();
@@ -64,7 +63,6 @@ class FormContainer extends Component<{}, State> {
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     this.validateStarsInput(this.state.stargazers_count);
-    console.log("submit clicked", this.state);
     this.handleQuery(e);
   };
 
@@ -96,7 +94,6 @@ class FormContainer extends Component<{}, State> {
   };
 
   showResults = (): JSX.Element => {
-    console.log(this.state.data);
     return this.state.isLoaded && !this.state.data.length ? (
       <div>
         <hr />
@@ -113,7 +110,6 @@ class FormContainer extends Component<{}, State> {
   };
 
   render() {
-    //oneliner functino that looks clean
     return this.state.error ? (
       this.showError()
     ) : (

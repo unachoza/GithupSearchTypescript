@@ -13,7 +13,6 @@ const ResultSingle = ({ everything }: { everything: RepoItems }): JSX.Element =>
     forked
   } = everything;
   const forkCheck = () => {
-    console.log('im trying')
     if (forked){
       return <div id="fork-button">forked</div>
     }
@@ -27,7 +26,6 @@ const ResultSingle = ({ everything }: { everything: RepoItems }): JSX.Element =>
         <p className="repo-description">{description}</p>
         <a href={html_url}>See on Github</a>
         {forkCheck()}
-        {/* <div id="fork-button">forked</div> */}
       </div>
       <div className="results-sub-container" id="star">
         <h6 className="text-title">Stars:</h6>
