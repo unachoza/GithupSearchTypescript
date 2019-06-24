@@ -14,6 +14,7 @@ export interface RepoItems {
   description: string;
   stargazers_count: number;
   license: { name: string };
+  forked: boolean
 }
 
 const ResultsList = (props: ResultsProps): JSX.Element => (

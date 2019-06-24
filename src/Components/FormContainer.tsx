@@ -1,6 +1,7 @@
 import React, { Component, MouseEvent } from "react";
 import Form from "./Form";
 import ResultsList from "./ResultsList";
+import { fetchGithub } from "../API/Github";
 import "../App.css";
 
 export interface State {
@@ -32,29 +33,28 @@ class FormContainer extends Component<{}, State> {
     description: ""
   };
 
-  validateStarsInput = (inputtxt:string): void =>  {
+  validateStarsInput = (inputtxt: string): void => {
     var letters = /^[A-Za-z]+$/;
-   if(inputtxt.match(letters)) {
-     alert('The stars input is asking for a query such as greater than, less than, exactly a value or a range of values')
-     window.location.reload()
-   } 
-  }
+    if (inputtxt.match(letters)) {
+      alert(
+        "The stars input is asking for a query such as greater than, less than, exactly a value or a range of values"
+      );
+      window.location.reload();
+    }
+  };
 
-  handleQuery = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
     const { text, license, forked, stargazers_count } = this.state;
     if (text && license && stargazers_count) {
-      await fetch(
-        `https://api.github.com/search/repositories?q=${text}+license:${license}+stars:${stargazers_count}+fork:${forked}&sort=stars&order=desc`
-      )
+      fetchGithub(text, license, forked, stargazers_count)
         .then(res => res.json())
         .then(data => {
           this.setState({
             isLoaded: true,
-            data: data.items,
+            data: data.items
           });
-        })
-      }
-    else {
+        });
+    } else {
       console.log("no");
       alert("please fill all query inputs");
     }
@@ -63,7 +63,7 @@ class FormContainer extends Component<{}, State> {
 
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    this.validateStarsInput(this.state.stargazers_count)
+    this.validateStarsInput(this.state.stargazers_count);
     console.log("submit clicked", this.state);
     this.handleQuery(e);
   };
@@ -96,6 +96,7 @@ class FormContainer extends Component<{}, State> {
   };
 
   showResults = (): JSX.Element => {
+    console.log(this.state.data);
     return this.state.isLoaded && !this.state.data.length ? (
       <div>
         <hr />
@@ -121,7 +122,7 @@ class FormContainer extends Component<{}, State> {
           text={e => this.handleTextInput(e)}
           stars={e => this.handleStarsInput(e)}
           dropDown={e => this.handleDropDown(e)}
-          toggleFork={e => this.handleDropDown(e)}
+          toggleFork={e => this.toggleFork(e)}
           submit={e => this.handleSubmit(e)}
         />
         {this.state.isLoaded ? (

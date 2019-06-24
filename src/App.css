@@ -21,8 +21,8 @@ hr {
   margin-top: 50px
 }
 img {
-  width: 50px;
-  height: auto;
+  width: 90px;
+  height: 35px;
   padding: 0;
   border-radius: 4px;
   margin-bottom: 10%;
@@ -82,7 +82,7 @@ img {
 }
 .logo {
  padding-top: 28px;
- padding-left: 15%;
+ padding-left: 50px;
 
 }
 
@@ -163,12 +163,12 @@ width: 20px;
 
 @media only screen and (max-width: 650px) {
   img {
-      width: 50px
+      width: 85px
   }
 }
 
 @media only screen and (max-width: 570px) {
   img {
-      width: 40px
+      width: 82px
   }
 }
