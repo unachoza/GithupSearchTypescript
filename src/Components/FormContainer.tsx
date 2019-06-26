@@ -33,6 +33,12 @@ class FormContainer extends Component<{}, State> {
     description: ""
   };
 
+  handleTextInput = (e: React.FormEvent<HTMLInputElement>): void => {
+    this.setState({ text: e.currentTarget.value });
+  };
+  handleStarsInput = (e: React.FormEvent<HTMLInputElement>): void => {
+    this.setState({ stargazers_count: e.currentTarget.value });
+  };
   validateStarsInput = (inputtxt: string): void => {
     var letters = /^[A-Za-z]+$/;
     if (inputtxt.match(letters)) {
@@ -41,6 +47,22 @@ class FormContainer extends Component<{}, State> {
       );
       window.location.reload();
     }
+  };
+  handleDropDown = (e: React.FormEvent<HTMLSelectElement>): void => {
+    this.setState({ license: e.currentTarget.value });
+  };
+
+  toggleFork = (): void => {
+    this.state.forked
+      ? this.setState({ forked: false })
+      : this.setState({ forked: true });
+      console.log(this.state.forked)
+  };
+
+  handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    this.validateStarsInput(this.state.stargazers_count);
+    this.handleQuery(e);
   };
 
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,39 +82,6 @@ class FormContainer extends Component<{}, State> {
     this.showResults();
   };
 
-  handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    this.validateStarsInput(this.state.stargazers_count);
-    this.handleQuery(e);
-  };
-
-  handleTextInput = (e: any): void => {
-    this.setState({ text: e.target.value });
-  };
-  handleStarsInput = (e: any): void => {
-    this.setState({ stargazers_count: e.target.value });
-  };
-  validateStars = () => {};
-  handleDropDown = (e: any): void => {
-    this.setState({ license: e.target.value });
-  };
-
-  toggleFork = (e: MouseEvent): void => {
-    this.state.forked
-      ? this.setState({ forked: false })
-      : this.setState({ forked: true });
-  };
-
-  // private show error
-  private showError = (): JSX.Element => {
-    return (
-      <div>
-        There was a problem: <br />
-        {this.state.error}
-      </div>
-    );
-  };
-
   showResults = (): JSX.Element => {
     return this.state.isLoaded && !this.state.data.length ? (
       <div>
@@ -108,6 +97,15 @@ class FormContainer extends Component<{}, State> {
       </div>
     );
   };
+  // private show error
+  private showError = (): JSX.Element => {
+    return (
+      <div>
+        There was a problem: <br />
+        {this.state.error}
+      </div>
+    );
+  };
 
   render() {
     return this.state.error ? (
@@ -118,7 +116,7 @@ class FormContainer extends Component<{}, State> {
           text={e => this.handleTextInput(e)}
           stars={e => this.handleStarsInput(e)}
           dropDown={e => this.handleDropDown(e)}
-          toggleFork={e => this.toggleFork(e)}
+          toggleFork={ () => this.toggleFork()}
           submit={e => this.handleSubmit(e)}
         />
         {this.state.isLoaded ? (

@@ -12,11 +12,14 @@ const ResultSingle = ({ everything }: { everything: RepoItems }): JSX.Element =>
     license,
     forked
   } = everything;
-  const forkCheck = () => {
+  const forkCheck = (forked:boolean) => {
+    console.log(forked)
+    console.log(everything)
     if (forked){
       return <div id="fork-button">forked</div>
     }
   }
+  forkCheck(forked)
   return (
     <div className="result-container">
       <div className="results-sub-container" id="text">
@@ -25,7 +28,7 @@ const ResultSingle = ({ everything }: { everything: RepoItems }): JSX.Element =>
         </h2>
         <p className="repo-description">{description}</p>
         <a href={html_url}>See on Github</a>
-        {forkCheck()}
+        {forkCheck(forked)}
       </div>
       <div className="results-sub-container" id="star">
         <h6 className="text-title">Stars:</h6>

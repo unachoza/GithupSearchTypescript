@@ -2,11 +2,11 @@ import React from "react";
 import "../App.css";
 
 interface FormProps extends React.Props<any> {
-  text: (e: any) => void;
-  stars: (e: any) => void;
-  dropDown: (e: any) => void;
-  toggleFork: (e: any) => void;
-  submit: (e: any) => void;
+  text: (e: React.FormEvent<HTMLInputElement>) => void;
+  stars: (e: React.FormEvent<HTMLInputElement>) => void;
+  dropDown: (e: React.FormEvent<HTMLSelectElement>) => void;
+  toggleFork: () => void;
+  submit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const Form = (props: FormProps) => {
@@ -43,7 +43,7 @@ const Form = (props: FormProps) => {
             <input
               id="box"
               type="checkbox"
-              onClick={e => props.toggleFork(e)}
+              onClick={() => props.toggleFork()}
             />
             <p id="checkbox-title">Include Forked</p>
           </div>
