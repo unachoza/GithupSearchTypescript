@@ -3,5 +3,6 @@ export const fetchGithub = (text:string, license:string,  forked:boolean, stars:
     `https://api.github.com/search/repositories?q=${text}+license:${
       license
     }+stars:${stars}+fork:${forked}&sort=stars&order=desc`
-  )
+  ) 
+  
 }

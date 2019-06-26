@@ -7,7 +7,7 @@ import "../App.css";
 export interface State {
   isLoaded: boolean;
   data?: number[];
-  forked: boolean;
+  fork: boolean;
   error: string;
   text: string;
   stargazers_count: string;
@@ -22,7 +22,7 @@ class FormContainer extends Component<{}, State> {
   state = {
     isLoaded: false,
     data: [],
-    forked: false,
+    fork: false,
     error: "",
     text: "",
     stargazers_count: "",
@@ -53,10 +53,10 @@ class FormContainer extends Component<{}, State> {
   };
 
   toggleFork = (): void => {
-    this.state.forked
-      ? this.setState({ forked: false })
-      : this.setState({ forked: true });
-      console.log(this.state.forked)
+    this.state.fork
+      ? this.setState({ fork: false })
+      : this.setState({ fork: true });
+    console.log(this.state.fork);
   };
 
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -66,9 +66,9 @@ class FormContainer extends Component<{}, State> {
   };
 
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
-    const { text, license, forked, stargazers_count } = this.state;
+    const { text, license, fork, stargazers_count } = this.state;
     if (text && license && stargazers_count) {
-      fetchGithub(text, license, forked, stargazers_count)
+      fetchGithub(text, license, fork, stargazers_count)
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -116,7 +116,7 @@ class FormContainer extends Component<{}, State> {
           text={e => this.handleTextInput(e)}
           stars={e => this.handleStarsInput(e)}
           dropDown={e => this.handleDropDown(e)}
-          toggleFork={ () => this.toggleFork()}
+          toggleFork={() => this.toggleFork()}
           submit={e => this.handleSubmit(e)}
         />
         {this.state.isLoaded ? (
