@@ -3,6 +3,8 @@ import Form from "./Form";
 import ResultsList from "./ResultsList";
 import { fetchGithub } from "../API/Github";
 import "../App.css";
+import { string } from "prop-types";
+import { validate } from "@babel/types";
 
 export interface State {
   isLoaded: boolean;
@@ -38,6 +40,9 @@ class FormContainer extends Component<{}, State> {
   };
   handleStarsInput = (e: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ stargazers_count: e.currentTarget.value });
+    this.validateStarsInput(e.currentTarget.value)
+    
+
   };
   validateStarsInput = (inputtxt: string): void => {
     var letters = /^[A-Za-z]+$/;
@@ -46,6 +51,14 @@ class FormContainer extends Component<{}, State> {
         "The stars input is asking for a query such as greater than, less than, exactly a value or a range of values"
       );
       window.location.reload();
+    } else if(inputtxt.match('-')){
+      const formatedInput = inputtxt.replace('-', '..')
+      this.setState({stargazers_count: formatedInput})
+      console.log(formatedInput)
+    }else if(inputtxt.match(' - ')){
+     const formatedInput = inputtxt.replace(' - ', '..')
+      this.setState({stargazers_count: formatedInput})
+      console.log(formatedInput)
     }
   };
   handleDropDown = (e: React.FormEvent<HTMLSelectElement>): void => {
@@ -59,14 +72,14 @@ class FormContainer extends Component<{}, State> {
     console.log(this.state.fork);
   };
 
-  handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => { 
     e.preventDefault();
-    this.validateStarsInput(this.state.stargazers_count);
     this.handleQuery(e);
   };
 
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
     const { text, license, fork, stargazers_count } = this.state;
+    console.log(this.state)
     if (text && license && stargazers_count) {
       fetchGithub(text, license, fork, stargazers_count)
         .then(res => res.json())
