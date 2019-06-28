@@ -87,9 +87,11 @@ class FormContainer extends Component<{}, State> {
         .then(data => {
           this.setState({
             isLoaded: true,
-            data: data.items
+            data: data.items,
+            error: data.errors[0].message
           });
-        });
+        })
+        console.log(this.state.error)
     } else {
       alert("please fill all query inputs");
     }
@@ -111,7 +113,7 @@ class FormContainer extends Component<{}, State> {
       </div>
     );
   };
-  
+
   render() {
     return (
       <div className="content">
