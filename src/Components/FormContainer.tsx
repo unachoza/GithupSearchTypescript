@@ -17,6 +17,11 @@ export interface State {
   html_url: string;
   description: string;
 }
+interface Error {
+  name: string;
+  message: string;
+  stack?: string;
+}
 
 class FormContainer extends Component<{}, State> {
   state = {
@@ -44,7 +49,7 @@ class FormContainer extends Component<{}, State> {
     var letters = /^[A-Za-z]+$/;
     if (inputtxt.match(letters)) {
       alert(
-        "The stars input is asking for a query such as greater than, less than, exactly a value or a range of values"
+        "The stars input is asking for a numerical query such as greater than, less than, exactly a value or a range of values"
       );
       window.location.reload();
     } else if (inputtxt.match("-")) {
@@ -52,9 +57,8 @@ class FormContainer extends Component<{}, State> {
       this.setState({ stargazers_count: formatedInput });
       console.log(formatedInput);
     } else if (inputtxt.match(" - ")) {
-      const formatedInput = inputtxt.replace(" - ", " .. ");
+      const formatedInput = inputtxt.replace(" - ", "..");
       this.setState({ stargazers_count: formatedInput });
-
       console.log(inputtxt, formatedInput);
     }
   };
@@ -107,20 +111,9 @@ class FormContainer extends Component<{}, State> {
       </div>
     );
   };
-  // private show error
-  private showError = (): JSX.Element => {
-    return (
-      <div>
-        There was a problem: <br />
-        {this.state.error}
-      </div>
-    );
-  };
-
+  
   render() {
-    return this.state.error ? (
-      this.showError()
-    ) : (
+    return (
       <div className="content">
         <Form
           text={e => this.handleTextInput(e)}
@@ -144,5 +137,4 @@ class FormContainer extends Component<{}, State> {
     );
   }
 }
-
 export default FormContainer;
