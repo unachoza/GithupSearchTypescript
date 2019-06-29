@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 
 interface FormProps extends React.Props<any> {
+  loading: () => void;
   text: (e: React.FormEvent<HTMLInputElement>) => void;
   stars: (e: React.FormEvent<HTMLInputElement>) => void;
   dropDown: (e: React.FormEvent<HTMLSelectElement>) => void;
@@ -48,7 +49,7 @@ const Form = (props: FormProps) => {
             <p id="checkbox-title">Include Forked</p>
           </div>
         </div>
-        <input id="submit" type="submit" value="Search" />
+        <input id="submit" type="submit" value="Search" onClick={(() => props.loading() )} />
       </form>
     </div>
   );

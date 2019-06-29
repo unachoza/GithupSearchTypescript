@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import Form from "./Form";
 import ResultsList from "./ResultsList";
 import { fetchGithub } from "../API/Github";
+import { AwesomeComponent } from "./Loading";
 import "../App.css";
 
 export interface State {
+  loading: boolean;
   isLoaded: boolean;
   data?: number[];
   fork: boolean;
-  error: string;
   text: string;
   stargazers_count: string;
   license: string;
@@ -17,18 +18,13 @@ export interface State {
   html_url: string;
   description: string;
 }
-interface Error {
-  name: string;
-  message: string;
-  stack?: string;
-}
 
 class FormContainer extends Component<{}, State> {
   state = {
+    loading: false,
     isLoaded: false,
     data: [],
     fork: false,
-    error: "",
     text: "",
     stargazers_count: "",
     license: "",
@@ -73,9 +69,22 @@ class FormContainer extends Component<{}, State> {
     console.log(this.state.fork);
   };
 
-  handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     this.handleQuery(e);
+  };
+  spinner = () => {
+    console.log("spinnning");
+    return <AwesomeComponent loading={this.state.loading} />;
+  };
+  showLoading = (): JSX.Element => {
+    console.log("hitting");
+    this.setState({ loading: true });
+    return this.state.loading ? (
+      <AwesomeComponent loading={this.state.loading} />
+    ) : (
+      <h1>nope</h1>
+    );
   };
 
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
@@ -111,28 +120,34 @@ class FormContainer extends Component<{}, State> {
       </div>
     );
   };
-  
+
   render() {
     return (
-      <div className="content">
-        <Form
-          text={e => this.handleTextInput(e)}
-          stars={e => this.handleStarsInput(e)}
-          dropDown={e => this.handleDropDown(e)}
-          toggleFork={() => this.toggleFork()}
-          submit={e => this.handleSubmit(e)}
-        />
-        {this.state.isLoaded ? (
-          this.showResults()
-        ) : (
-          <div>
-            <hr />
-            <p className="results-below-text">
-              Please enter query and click SEARCH button above, results appear
-              here
-            </p>
-          </div>
-        )}
+      <div>
+        {this.state.loading ? this.showLoading() : this.showResults()}
+        <div className="content">
+          <Form
+            loading={() => this.showLoading()}
+            text={e => this.handleTextInput(e)}
+            stars={e => this.handleStarsInput(e)}
+            dropDown={e => this.handleDropDown(e)}
+            toggleFork={() => this.toggleFork()}
+            submit={e => this.handleSubmit(e)}
+          />
+          {this.state.isLoaded ? (
+            setTimeout(() => {
+              this.showResults();
+            }, 400)
+          ) : (
+            <div>
+              <hr />
+              <p className="results-below-text">
+                Please enter query and click SEARCH button above, results appear
+                here
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
