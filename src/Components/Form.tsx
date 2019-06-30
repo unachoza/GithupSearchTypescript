@@ -7,6 +7,7 @@ interface FormProps extends React.Props<any> {
   dropDown: (e: React.FormEvent<HTMLSelectElement>) => void;
   toggleFork: () => void;
   submit: (e: React.FormEvent<HTMLFormElement>) => void;
+  loading: () => void
 }
 
 const Form = (props: FormProps) => {
@@ -48,7 +49,7 @@ const Form = (props: FormProps) => {
             <p id="checkbox-title">Include Forked</p>
           </div>
         </div>
-        <input id="submit" type="submit" value="Search" />
+        <input id="submit" type="submit" value="Search" onClick={props.loading}/>
       </form>
     </div>
   );

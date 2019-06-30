@@ -6,6 +6,7 @@ import "../App.css";
 
 export interface State {
   isLoaded: boolean;
+  loading: boolean;
   data?: number[];
   fork: boolean;
   error: string;
@@ -26,6 +27,7 @@ interface Error {
 class FormContainer extends Component<{}, State> {
   state = {
     isLoaded: false,
+    loading: false,
     data: [],
     fork: false,
     error: "",
@@ -56,10 +58,6 @@ class FormContainer extends Component<{}, State> {
       const formatedInput = inputtxt.replace("-", "..");
       this.setState({ stargazers_count: formatedInput });
       console.log(formatedInput);
-    } else if (inputtxt.match(" - ")) {
-      const formatedInput = inputtxt.replace(" - ", "..");
-      this.setState({ stargazers_count: formatedInput });
-      console.log(inputtxt, formatedInput);
     }
   };
   handleDropDown = (e: React.FormEvent<HTMLSelectElement>): void => {
@@ -77,7 +75,12 @@ class FormContainer extends Component<{}, State> {
     e.preventDefault();
     this.handleQuery(e);
   };
-
+  loadingSpinner = () => {
+    this.setState({ loading: true })
+    setTimeout(() => {
+      this.setState({loading: false})
+    }, 3000)
+  }
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
     const { text, license, fork, stargazers_count } = this.state;
     console.log(this.state);
@@ -113,6 +116,7 @@ class FormContainer extends Component<{}, State> {
   };
   
   render() {
+    const {loading} = this.state
     return (
       <div className="content">
         <Form
@@ -121,7 +125,9 @@ class FormContainer extends Component<{}, State> {
           dropDown={e => this.handleDropDown(e)}
           toggleFork={() => this.toggleFork()}
           submit={e => this.handleSubmit(e)}
+          loading={() => this.loadingSpinner()}
         />
+        {loading && <img src="https://images-na.ssl-images-amazon.com/images/I/61Fiw7Chp1L._SX425_.jpg" alt="spinner"/>}
         {this.state.isLoaded ? (
           this.showResults()
         ) : (
