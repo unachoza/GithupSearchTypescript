@@ -63,7 +63,12 @@
   color: rgb(46, 43, 43);
   margin: 0px;
 }
-
+#center {
+align-content: center;
+justify-content: center;
+justify-items: center;
+align-items: center;
+}
 a {
   text-decoration: none;
   color: black;

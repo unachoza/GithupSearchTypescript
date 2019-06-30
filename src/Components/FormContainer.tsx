@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import Form from "./Form";
 import ResultsList from "./ResultsList";
 import { fetchGithub } from "../API/Github";
-import LoadingBounce from "./LoadingBounce"
+import PulseLoader from "./LoadingBounce";
 import "../App.css";
-
 
 export interface State {
   isLoaded: boolean;
@@ -20,6 +19,7 @@ export interface State {
   html_url: string;
   description: string;
 }
+
 interface Error {
   name: string;
   message: string;
@@ -78,11 +78,12 @@ class FormContainer extends Component<{}, State> {
     this.handleQuery(e);
   };
   loadingSpinner = () => {
-    this.setState({ loading: true })
+    this.setState({ loading: true });
     setTimeout(() => {
-      this.setState({loading: false})
-    }, 3000)
-  }
+      this.setState({ loading: false });
+    }, 8000);
+  };
+  
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
     const { text, license, fork, stargazers_count } = this.state;
     console.log(this.state);
@@ -116,9 +117,9 @@ class FormContainer extends Component<{}, State> {
       </div>
     );
   };
-  
+
   render() {
-    const {loading} = this.state
+    const { loading } = this.state;
     return (
       <div className="content">
         <Form
@@ -127,10 +128,11 @@ class FormContainer extends Component<{}, State> {
           dropDown={e => this.handleDropDown(e)}
           toggleFork={() => this.toggleFork()}
           submit={e => this.handleSubmit(e)}
-          loading={() => this.loadingSpinner()}
+          loadingDots={() => this.loadingSpinner()}
+          loading={this.state.loading}
         />
-        {loading && <LoadingBounce loading={this.state.loading}/>}
-        {this.state.isLoaded ? (
+        {loading && <PulseLoader loading={this.state.loading} />}
+        {this.state.isLoaded && !this.state.loading? (
           this.showResults()
         ) : (
           <div>

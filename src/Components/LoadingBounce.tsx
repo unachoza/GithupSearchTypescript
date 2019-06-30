@@ -1,27 +1,30 @@
-import React from 'react'
-import { css } from '@emotion/core';
+import React from "react";
+import { css } from "@emotion/core";
 // First way to import
-import { ClipLoader } from 'react-spinners';
-import State from './FormContainer'
+import { PulseLoader } from "react-spinners";
+import State from "./FormContainer";
 
-const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
+const override: any = css`
+  bordercolor: red;
+  margin-left: 45%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
 `;
 
-export const LoadingBounce = (loading: any) => {
-    return (
-      <div className='sweet-loading'>
-        <ClipLoader
-        //   css={override}
-          sizeUnit={"px"}
-          size={150}
-          color={'#123abc'}
-          loading={loading}
-        />
-      </div> 
-    )
-}
 
-export default LoadingBounce
+ const Loading = (loading: any) => {
+  return (
+    <div className="sweet-loading">
+      <PulseLoader
+        css={override}
+        sizeUnit={"px"}
+        size={15}
+        color={"#5285C1"}
+        loading={loading}
+      />
+    </div>
+  );
+};
+
+export default Loading;
