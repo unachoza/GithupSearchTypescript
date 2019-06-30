@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Form from "./Form";
 import ResultsList from "./ResultsList";
 import { fetchGithub } from "../API/Github";
+import LoadingBounce from "./LoadingBounce"
 import "../App.css";
+
 
 export interface State {
   isLoaded: boolean;
@@ -127,7 +129,7 @@ class FormContainer extends Component<{}, State> {
           submit={e => this.handleSubmit(e)}
           loading={() => this.loadingSpinner()}
         />
-        {loading && <img src="https://images-na.ssl-images-amazon.com/images/I/61Fiw7Chp1L._SX425_.jpg" alt="spinner"/>}
+        {loading && <LoadingBounce loading={this.state.loading}/>}
         {this.state.isLoaded ? (
           this.showResults()
         ) : (
