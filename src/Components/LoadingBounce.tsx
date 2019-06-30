@@ -2,7 +2,6 @@ import React from "react";
 import { css } from "@emotion/core";
 // First way to import
 import { PulseLoader } from "react-spinners";
-import State from "./FormContainer";
 
 const override: any = css`
   bordercolor: red;
@@ -13,7 +12,7 @@ const override: any = css`
 `;
 
 
- const Loading = (loading: any) => {
+ const Loading = (loading: any): JSX.Element => {
   return (
     <div className="sweet-loading">
       <PulseLoader

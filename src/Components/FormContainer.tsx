@@ -4,6 +4,7 @@ import ResultsList from "./ResultsList";
 import { fetchGithub } from "../API/Github";
 import PulseLoader from "./LoadingBounce";
 import "../App.css";
+import { bool } from "prop-types";
 
 export interface State {
   isLoaded: boolean;
@@ -76,14 +77,15 @@ class FormContainer extends Component<{}, State> {
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     this.handleQuery(e);
+    console.log(this.state);
   };
   loadingSpinner = () => {
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({ loading: false });
-    }, 8000);
+    }, 2000);
   };
-  
+
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
     const { text, license, fork, stargazers_count } = this.state;
     console.log(this.state);
@@ -103,7 +105,9 @@ class FormContainer extends Component<{}, State> {
   };
 
   showResults = (): JSX.Element => {
-    return this.state.isLoaded && !this.state.data.length ? (
+    const { isLoaded, data } = this.state
+    console.log('showing')
+    return isLoaded && !data.length ? (
       <div>
         <hr />
         <p className="results-below-text">SEARCH Results</p>
@@ -119,9 +123,9 @@ class FormContainer extends Component<{}, State> {
   };
 
   render() {
-    const { loading } = this.state;
+    const { loading, isLoaded } = this.state;
     return (
-      <div className="content">
+      <div className="content" >
         <Form
           text={e => this.handleTextInput(e)}
           stars={e => this.handleStarsInput(e)}
@@ -129,10 +133,10 @@ class FormContainer extends Component<{}, State> {
           toggleFork={() => this.toggleFork()}
           submit={e => this.handleSubmit(e)}
           loadingDots={() => this.loadingSpinner()}
-          loading={this.state.loading}
+          loading={loading}
         />
-        {loading && <PulseLoader loading={this.state.loading} />}
-        {this.state.isLoaded && !this.state.loading? (
+        {loading && <PulseLoader loading={loading} />}
+        {isLoaded && !loading ? (
           this.showResults()
         ) : (
           <div>
