@@ -4,7 +4,6 @@ import ResultsList from "./ResultsList";
 import { fetchGithub } from "../API/Github";
 import PulseLoader from "./LoadingBounce";
 import "../App.css";
-import { ErrorMessage } from "./Error";
 
 export interface State {
   isLoaded: boolean;
@@ -51,10 +50,13 @@ class FormContainer extends Component<{}, State> {
     this.validateStarsInput(e.currentTarget.value);
   };
   validateStarsInput = (inputtxt: string): void => {
-    let letters = /^[A-Za-z]+$/;
-     inputtxt.match(letters) ? <ErrorMessage /> : ""
-      // window.location.reload();
-    if (inputtxt.match("-")) {
+    var letters = /^[A-Za-z]+$/;
+    if (inputtxt.match(letters)) {
+      alert(
+        "The stars input is asking for a numerical query such as greater than, less than, exactly a value or a range of values"
+      );
+      window.location.reload();
+    } else if (inputtxt.match("-")) {
       const formatedInput = inputtxt.replace("-", "..");
       this.setState({ stargazers_count: formatedInput });
       console.log(formatedInput);
@@ -102,8 +104,8 @@ class FormContainer extends Component<{}, State> {
   };
 
   showResults = (): JSX.Element => {
-    const { isLoaded, data } = this.state;
-    console.log("showing");
+    const { isLoaded, data } = this.state
+    console.log('showing')
     return isLoaded && !data.length ? (
       <div>
         <hr />
@@ -122,16 +124,14 @@ class FormContainer extends Component<{}, State> {
   render() {
     const { loading, isLoaded } = this.state;
     return (
-      <div className="content">
+      <div className="content" >
         <Form
           text={e => this.handleTextInput(e)}
+          stars={e => this.handleStarsInput(e)}
           dropDown={e => this.handleDropDown(e)}
           toggleFork={() => this.toggleFork()}
           submit={e => this.handleSubmit(e)}
           loadingDots={() => this.loadingSpinner()}
-          validateStarsInput={(inputtxt: string) =>
-            this.validateStarsInput(inputtxt)
-          }
           loading={loading}
         />
         {loading && <PulseLoader loading={loading} />}

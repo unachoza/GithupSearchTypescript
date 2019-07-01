@@ -13,9 +13,8 @@ const ResultSingle = ({ everything }: { everything: RepoItems }): JSX.Element =>
     fork
   } = everything;
   const forkCheck = (fork:boolean) => {
-    console.log(fork)
-    
-    if (fork){
+    if (fork) {
+      console.log(fork)
       return <div className="repo-text" id="fork-button">forked</div>
     }
   }

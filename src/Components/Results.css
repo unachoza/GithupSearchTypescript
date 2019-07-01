@@ -12,7 +12,6 @@
   border: 1px solid green;
 }
 #fork-button {
-  visibility: hidden;
   display: flex;
   justify-content: center;
   height: 22px;
