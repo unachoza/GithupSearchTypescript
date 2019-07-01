@@ -83,7 +83,7 @@ class FormContainer extends Component<{}, State> {
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({ loading: false });
-    }, 2000);
+    }, 3000);
   };
 
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {

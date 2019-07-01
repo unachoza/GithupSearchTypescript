@@ -22,7 +22,6 @@ const Form = (props: FormProps) => {
           <input
             type="input"
             placeholder="Text"
-            required
             onBlur={e => text(e)}
             disabled={loading}
           />

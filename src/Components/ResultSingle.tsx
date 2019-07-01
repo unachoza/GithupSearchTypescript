@@ -16,19 +16,20 @@ const ResultSingle = ({ everything }: { everything: RepoItems }): JSX.Element =>
     console.log(fork)
     
     if (fork){
-      return <div id="fork-button">fork</div>
+      return <div className="results-sub-container" id="fork-button">forked</div>
     }
   }
   return (
     <div className="result-container">
       <div className="results-sub-container" id="text">
         <h2 className="repo-text">
-          {name} Author: {owner.login}
+          REPO NAME: {name} REPO AUTHOR: {owner.login}
         </h2>
         <p className="repo-description">{description}</p>
         <a href={html_url}>See on Github</a>
-        {forkCheck(fork)}
+        
       </div>
+      {forkCheck(fork)}
       <div className="results-sub-container" id="star">
         <h6 className="text-title">Stars:</h6>
         <p className="text-answer">{stargazers_count}</p>
