@@ -12,6 +12,7 @@
   border: 1px solid green;
 }
 #fork-button {
+  visibility: hidden;
   display: flex;
   justify-content: center;
   height: 22px;
@@ -78,6 +79,20 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.error {
+  display: none;
+  color: #555;
+  border-radius: 5px;
+  font-family: Tahoma, Geneva, Arial, sans-serif;
+  font-size: .8em;
+  padding: 5px 5px 5px 30px;
+  margin: 5px 5px 5px 35px;
+  width: 7em;
+  background: #ffecec url('http://www.html5accessibility.com/images/cross.png') no-repeat 10px 50%;
+  border: 2px solid #f5aca6;
+}
+
 @media only screen and (max-width: 650px) {
   .result-container {
     display: flex;
