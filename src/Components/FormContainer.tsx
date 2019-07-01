@@ -11,6 +11,7 @@ export interface State {
   loading: boolean;
   data?: number[];
   fork: boolean;
+  forkVisible: boolean;
   error: string;
   text: string;
   stargazers_count: string;
@@ -33,6 +34,7 @@ class FormContainer extends Component<{}, State> {
     loading: false,
     data: [],
     fork: false,
+    forkVisible: false,
     error: "",
     text: "",
     stargazers_count: "",
@@ -83,7 +85,7 @@ class FormContainer extends Component<{}, State> {
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({ loading: false });
-    }, 3000);
+    }, 750);
   };
 
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {

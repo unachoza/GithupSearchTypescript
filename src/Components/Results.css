@@ -43,6 +43,8 @@
 .repo-text {
   color: #5285c1;
   font-size: 13px;
+  width: 100%;
+  display: inline-flex;
 }
 .repo-description {
   font-size: 12px;
