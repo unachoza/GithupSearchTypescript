@@ -46,22 +46,39 @@ class FormContainer extends Component<{}, State> {
     this.setState({ text: e.currentTarget.value });
   };
   handleStarsInput = (e: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({ stargazers_count: e.currentTarget.value });
-    this.validateStarsInput(e.currentTarget.value);
+    this.setState({ stargazers_count: this.validateStars(e) });
+    console.log(this.state.stargazers_count)
   };
-  validateStarsInput = (inputtxt: string): void => {
-    var letters = /^[A-Za-z]+$/;
-    if (inputtxt.match(letters)) {
+
+  validateStars = (e: React.FormEvent<HTMLInputElement>): any => {
+    let input: any = e.currentTarget.value;
+    console.log(input)
+    this.checkForLetters(input)
+    input = this.removeWhiteSpace(input)
+   return this.changeToDots(input)
+  };
+  checkForLetters = (input: string) => {
+    const letters = /^[A-Za-z]+$/;
+    if (input.match(letters)) {
       alert(
         "The stars input is asking for a numerical query such as greater than, less than, exactly a value or a range of values"
       );
       window.location.reload();
-    } else if (inputtxt.match("-")) {
-      const formatedInput = inputtxt.replace("-", "..");
-      this.setState({ stargazers_count: formatedInput });
-      console.log(formatedInput);
     }
   };
+  removeWhiteSpace = (input: string) => {
+    input = input.replace(/ /g, "");
+    console.log(input);
+    return input;
+  };
+  changeToDots = (input: string) => {
+    if (input.match("-")) {
+      const formatedInput = input.replace("-", "..");
+      console.log(formatedInput);
+      return formatedInput;
+    }
+  };
+
   handleDropDown = (e: React.FormEvent<HTMLSelectElement>): void => {
     this.setState({ license: e.currentTarget.value });
   };
@@ -104,8 +121,8 @@ class FormContainer extends Component<{}, State> {
   };
 
   showResults = (): JSX.Element => {
-    const { isLoaded, data } = this.state
-    console.log('showing')
+    const { isLoaded, data } = this.state;
+    console.log("showing");
     return isLoaded && !data.length ? (
       <div>
         <hr />
@@ -124,7 +141,7 @@ class FormContainer extends Component<{}, State> {
   render() {
     const { loading, isLoaded } = this.state;
     return (
-      <div className="content" >
+      <div className="content">
         <Form
           text={e => this.handleTextInput(e)}
           stars={e => this.handleStarsInput(e)}
