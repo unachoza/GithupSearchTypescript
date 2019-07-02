@@ -1,6 +1,5 @@
 import React from "react";
 import { css } from "@emotion/core";
-// First way to import
 import { PulseLoader } from "react-spinners";
 
 const override: any = css`
@@ -10,7 +9,6 @@ const override: any = css`
   margin-bottom: 100px;
 
 `;
-
 
 const Loading = (loading: boolean | any): JSX.Element => {
   return (

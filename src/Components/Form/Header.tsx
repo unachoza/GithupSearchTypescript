@@ -6,7 +6,7 @@ const Header = (): JSX.Element => (
     <img
       className="logo"
       src="https://res.cloudinary.com/dh41vh9dx/image/upload/v1560352066/logo.png"
-      alt="github logo"
+      alt="Even logo"
     />
   </div>
 );
