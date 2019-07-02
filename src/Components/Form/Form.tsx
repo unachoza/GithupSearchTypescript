@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import "../../App.css";
 
 interface FormProps extends React.Props<any> {
   text: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -8,15 +8,23 @@ interface FormProps extends React.Props<any> {
   toggleFork: () => void;
   submit: (e: React.FormEvent<HTMLFormElement>) => void;
   loadingDots: () => void;
-  loading: boolean
+  loading: boolean;
 }
 
-const Form = (props: FormProps) => {
-  const { text, stars, dropDown, toggleFork, submit, loadingDots, loading } = props;
+const Form = (props: FormProps): JSX.Element => {
+  const {
+    text,
+    stars,
+    dropDown,
+    toggleFork,
+    submit,
+    loadingDots,
+    loading
+  } = props;
 
   return (
     <div className="content">
-      <form className="form" onSubmit={e => submit(e)} >
+      <form className="form" onSubmit={e => submit(e)}>
         <div className="column">
           <div>Text</div>
           <input
@@ -26,7 +34,12 @@ const Form = (props: FormProps) => {
             disabled={loading}
           />
           <div>License</div>
-          <select className="dropdown" name="license" onBlur={e => dropDown(e)} disabled={loading}>
+          <select
+            className="dropdown"
+            name="license"
+            onBlur={e => dropDown(e)}
+            disabled={loading}
+          >
             {["", "MIT", "ISC", "apache-2.0", "gpl"].map(choice => (
               <option value={choice}>{choice}</option>
             ))}
@@ -34,19 +47,23 @@ const Form = (props: FormProps) => {
         </div>
         <div className="column">
           <div>Stars</div>
-          <input type="input" placeholder="Stars" onBlur={e => stars(e)} disabled={loading} />
+          <input
+            type="input"
+            placeholder="Stars"
+            onBlur={e => stars(e)}
+            disabled={loading}
+          />
           <div id="fork">
-            <input id="box" type="checkbox" onClick={() => toggleFork()} disabled={loading}/>
+            <input
+              id="box"
+              type="checkbox"
+              onClick={() => toggleFork()}
+              disabled={loading}
+            />
             <p id="checkbox-title">Include Forked</p>
           </div>
         </div>
-        <input
-          id="submit"
-          type="submit"
-          value="Search"
-          onClick={loadingDots}
-          
-        />
+        <input id="submit" type="submit" value="Search" onClick={loadingDots} />
       </form>
     </div>
   );

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Form from "./Form";
-import ResultsList from "./ResultsList";
-import { fetchGithub } from "../API/Github";
-import PulseLoader from "./LoadingBounce";
-import "../App.css";
+import ResultsList from "../Results/ResultsList";
+import { fetchGithub } from "../../API/Github";
+import PulseLoader from "../Results/Loading";
+import "../../App.css";
 
 export interface State {
   isLoaded: boolean;

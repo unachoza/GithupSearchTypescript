@@ -12,7 +12,7 @@ const override: any = css`
 `;
 
 
- const Loading = (loading: any): JSX.Element => {
+const Loading = (loading: boolean | any): JSX.Element => {
   return (
     <div className="sweet-loading">
       <PulseLoader

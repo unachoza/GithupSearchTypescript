@@ -1,7 +1,7 @@
 import React from "react";
 import ResultSingle from "./ResultSingle";
 import "./Results.css";
-import "../App.css";
+import "../../App.css";
 
 export interface ResultsProps {
   text: string;
@@ -14,7 +14,7 @@ export interface RepoItems {
   description: string;
   stargazers_count: number;
   license: { name: string };
-  fork: boolean
+  fork: boolean;
 }
 
 const ResultsList = (props: ResultsProps): JSX.Element => (
