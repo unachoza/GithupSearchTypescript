@@ -20,12 +20,6 @@ export interface State {
   description: string;
 }
 
-interface Error {
-  name: string;
-  message: string;
-  stack?: string;
-}
-
 class FormContainer extends Component<{}, State> {
   state = {
     isLoaded: false,
@@ -45,18 +39,7 @@ class FormContainer extends Component<{}, State> {
   handleTextInput = (e: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ text: e.currentTarget.value });
   };
-  handleStarsInput = (e: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({ stargazers_count: this.validateStars(e) });
-    console.log(this.state.stargazers_count)
-  };
 
-  validateStars = (e: React.FormEvent<HTMLInputElement>): any => {
-    let input: any = e.currentTarget.value;
-    console.log(input)
-    this.checkForLetters(input)
-    input = this.removeWhiteSpace(input)
-   return this.changeToDots(input)
-  };
   checkForLetters = (input: string) => {
     const letters = /^[A-Za-z]+$/;
     if (input.match(letters)) {
@@ -66,45 +49,44 @@ class FormContainer extends Component<{}, State> {
       window.location.reload();
     }
   };
-  removeWhiteSpace = (input: string) => {
-    input = input.replace(/ /g, "");
-    console.log(input);
-    return input;
-  };
+  removeWhiteSpace = (input: string) => (input = input.replace(/ /g, ""));
+
   changeToDots = (input: string) => {
-    if (input.match("-")) {
-      const formatedInput = input.replace("-", "..");
-      console.log(formatedInput);
-      return formatedInput;
-    }
+    let formatedInput: string;
+    return input.match("-")
+      ? (formatedInput = input.replace("-", ".."))
+      : input;
   };
+  validateStars = (e: React.FormEvent<HTMLInputElement>): string => {
+    let input: string = e.currentTarget.value;
+    this.checkForLetters(input);
+    input = this.removeWhiteSpace(input);
+    return this.changeToDots(input);
+  };
+  handleStarsInput = (e: React.FormEvent<HTMLInputElement>): void =>
+    this.setState({ stargazers_count: this.validateStars(e) });
 
-  handleDropDown = (e: React.FormEvent<HTMLSelectElement>): void => {
+  handleDropDown = (e: React.FormEvent<HTMLSelectElement>): void =>
     this.setState({ license: e.currentTarget.value });
-  };
 
-  toggleFork = (): void => {
+  toggleFork = (): void =>
     this.state.fork
       ? this.setState({ fork: false })
       : this.setState({ fork: true });
-    console.log(this.state.fork);
-  };
 
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     this.handleQuery(e);
-    console.log(this.state);
   };
   loadingSpinner = () => {
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({ loading: false });
-    }, 750);
+    }, 1000);
   };
 
   handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
     const { text, license, fork, stargazers_count } = this.state;
-    console.log(this.state);
     if (text && license && stargazers_count) {
       fetchGithub(text, license, fork, stargazers_count)
         .then(res => res.json())
@@ -122,7 +104,6 @@ class FormContainer extends Component<{}, State> {
 
   showResults = (): JSX.Element => {
     const { isLoaded, data } = this.state;
-    console.log("showing");
     return isLoaded && !data.length ? (
       <div>
         <hr />
