@@ -11,7 +11,7 @@
     "@types/request": "^2.48.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "react-spinner": "^0.2.7",
     "react-spinners": "^0.5.4",
     "typescript": "3.5.2"
